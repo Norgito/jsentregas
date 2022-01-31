@@ -1,45 +1,50 @@
 //Entrega 02
 //E-commerce
 
-var accesorio,precio,descuento,operacion1,operacion2,operacion3,iva,compra,pagar,cantidad,porcentaje;
+//Entrada Prompt + Condiciones
+let validar = prompt("Ingrese cualquier tecla para cargar o ESC para salir");
 
-//Entrada Prompt
-accesorio = prompt ('Ingresar Accesorio');
-precio = parseFloat(prompt('Ingresar Precio'));
-cantidad = parseFloat(prompt("Ingresar Cantidad"));
+while (validar != "ESC") {
+  let accesorio = prompt("Ingresar Accesorio");
+  if (accesorio == "") {
+    alert("No cargaste correctamente");
+    break;
+  }
+  let precio = parseFloat(prompt("Ingresar Precio"));
+  if (precio == "") {
+    alert("No cargaste correctamente");
+    break;
+  }
+  let cantidad = parseFloat(prompt("Ingresar Cantidad"));
+  if (cantidad == "") {
+    alert("No cargaste correctamente");
+    break;
+  }
 
-//Descuento e Impuestos
-descuento = 0.30;
-iva = 0.21;
+  alert('Accesorio: '+ accesorio + '\nPrecio: $' + precio + '\nCantidad: ' +cantidad);
 
-//Operaciones
-compra = precio * cantidad;
+  //Descuento e Impuestos
+  iva = 0.21;
 
-operacion1 = compra * descuento;
-operacion2 = compra - operacion1; //Descuento
-operacion3 = operacion2 * iva; //IVA
+  function descuento(valor1, valor2) {
+    return valor1 * valor2 * 0.3;
+  }
+  function impuesto(valor1, tax) {
+    return valor1 * tax;
+  }
 
-pagar = operacion2 + operacion3;
+  //Operaciones
+  operacion1 = precio * cantidad - descuento(precio, cantidad); //Descuento
+  operacion2 = impuesto(operacion1, iva); //IVA
 
-total = pagar.toFixed(2);
-descuento = operacion1.toFixed(2);
-iva = operacion3.toFixed(2);
+  pagar = operacion1 + operacion2;
 
-//Salida
-alert('Descuento (30%): -$'+ descuento + '\nI.V.A. (21%): $'+ iva + '\nTotal a pagar: $'+ total + '\n\n✨ Gracias por su compra! ✨');
+  total = pagar.toFixed(2);
+  descuento = descuento(precio, cantidad).toFixed(2);
+  iva = operacion2.toFixed(2);
 
+  alert( "Descuento (30%): -$" + descuento + "\nI.V.A. (21%): $" + iva + "\nTotal a pagar: $" + total + "\n\n✨ Gracias por su compra! ✨");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  validar = prompt("Ingrese Producto o ESC para salir");
+}
 
